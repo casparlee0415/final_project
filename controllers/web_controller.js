@@ -48,8 +48,10 @@ export const scooterpage = (req,res) =>
 {
     console.log(req.body);
     var scooter_name=req.body.scooter_name;
+    var brand_name=req.body.brand_name;
     let sql="Select * from scooterpage where scooter_name = '" + scooter_name + "'";
-    
+    let sql2="Select * from brandpage where brand_name = '" + brand_name + "' and scooter_name <> '" + 
+                scooter_name + "' order by price ASC limit 3";
     pool.getConnection((err,db)=>{
         if(err){
             throw err;
@@ -60,17 +62,19 @@ export const scooterpage = (req,res) =>
             if(err){
                 throw err;
             }
-            results=JSON.parse(JSON.stringify(result));
-            data=results[0];
-            res.render('scooter',{data});
+            data=JSON.parse(JSON.stringify(result[0]));
+            db.query(sql2,(err,result)=>{
+                if(err){
+                    throw err;
+                }
+                results=JSON.parse(JSON.stringify(result));
+                res.render('scooter',{data,results,brand_name});
+            }); 
         });  
         db.release();
     });
 } 
 
-export const brandimagepage = (req,res) =>
-{
-    res.render('brandimage');
-}
+
 
 

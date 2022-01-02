@@ -33,6 +33,8 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/css', express.static('public/css'));
 app.use('/js', express.static('public/js'));
+app.use('/img', express.static('public/img'));
+app.use('/assets', express.static('public/assets'));
 
 app.use('/', usersRoutes);
 
