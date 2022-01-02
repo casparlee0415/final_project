@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Blob } from 'buffer';
 
 export const homepage = (req,res) =>{
-    let sql="Select brand_name from brand order by brand_name ASC";
+    let sql="Select * from indexpage";
     pool.getConnection((err,db)=>{
         if(err){
             throw err;
