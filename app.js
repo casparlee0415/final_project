@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload';
 import usersRoutes from './routes/routers.js';
 import morgan from 'morgan';
 import _ from 'lodash';
+import compression from 'compression';
 
 const app = express();
 // Parse URL-encoded bodies (as sent by HTML forms)
@@ -35,7 +36,7 @@ app.use('/css', express.static('public/css'));
 app.use('/js', express.static('public/js'));
 app.use('/img', express.static('public/img'));
 app.use('/assets', express.static('public/assets'));
-
+app.use(compression());
 app.use('/', usersRoutes);
 
 var port = process.env.PORT||3000;
