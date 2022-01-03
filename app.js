@@ -37,6 +37,8 @@ app.use('/js', express.static('public/js'));
 app.use('/img', express.static('public/img'));
 app.use('/assets', express.static('public/assets'));
 app.use(compression());
+
+
 app.use('/', usersRoutes);
 
 var port = process.env.PORT||3000;
