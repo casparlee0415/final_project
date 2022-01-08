@@ -25,7 +25,7 @@ export const homepage = (req,res) =>{
 export const brandpage = (req,res) =>
 {
     console.log(req.body);
-    var brand_name=req.body.brand_name;
+    var brand_name=req.query.brand_name;
     let sql="Select * from brandpage where brand_name = '" + brand_name + "'";
     pool.getConnection((err,db)=>{
         if(err){
@@ -47,8 +47,8 @@ export const brandpage = (req,res) =>
 export const scooterpage = (req,res) =>
 {
     console.log(req.body);
-    var scooter_name=req.body.scooter_name;
-    var brand_name=req.body.brand_name;
+    var scooter_name=req.query.scooter_name;
+    var brand_name=req.query.brand_name;
     let sql="Select * from scooterpage where scooter_name = '" + scooter_name + "'";
     let sql2="Select * from brandpage where brand_name = '" + brand_name + "' and scooter_name <> '" + 
                 scooter_name + "' order by price ASC limit 3";

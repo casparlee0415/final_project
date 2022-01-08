@@ -21,7 +21,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item">
-                            <form action="/brand" method="post">
+                            <form action="/brand" method="get">
                                 <input type="hidden" id='<%= brand_name%>' name="brand_name" value="<%= brand_name%>">
                                 <a class="nav-link" href="javascript:void(0)" onclick="parentNode.submit()">回到機車選單</a>
                             </form>
@@ -60,7 +60,7 @@
                                 <!-- <p class="card-text"></p> -->
                             </div>
                             <div class="card-footer">
-                                <form action='/scooter' method="post">
+                                <form action='/scooter' method="get">
                                     <input type='hidden' id='<%= results[i].scooter_name %>' name="scooter_name" value='<%= results[i].scooter_name %>'>
                                     <input type='hidden' id='<%= brand_name %>' name="brand_name" value='<%= brand_name %>'>
                                     <a class="btn btn-primary btn-sm" href="javascript:void(0)" onclick="parentNode.submit()">More Info</a>

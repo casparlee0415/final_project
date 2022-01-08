@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get('/',homepage);
 router.get('/index',homepage);
-router.post('/brand',brandpage);
-router.post('/scooter',scooterpage);
+router.get('/brand',brandpage);
+router.get('/scooter',scooterpage);
 
 export default router;
