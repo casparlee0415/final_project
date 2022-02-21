@@ -37,6 +37,10 @@ export const brandpage = (req,res) =>
                 throw err;
             }
             results=JSON.parse(JSON.stringify(result));
+            for(var i = 0;i < results.length; i++)
+            {
+                results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+            }
             console.log(results);
             res.render('brand',{results,brand_name});
         });
@@ -63,11 +67,16 @@ export const scooterpage = (req,res) =>
                 throw err;
             }
             data=JSON.parse(JSON.stringify(result[0]));
+            data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
             db.query(sql2,(err,result)=>{
                 if(err){
                     throw err;
                 }
                 results=JSON.parse(JSON.stringify(result));
+                for(var i = 0;i < results.length; i++)
+                {
+                    results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+                }
                 res.render('scooter',{data,results,brand_name});
             }); 
         });  

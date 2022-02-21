@@ -14,4 +14,4 @@ def batch_rename(path):
 
         count = count + 1     
 
-batch_rename("./img/scooter")
+batch_rename("./img/brand/")
