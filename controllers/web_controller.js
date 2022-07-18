@@ -1,6 +1,5 @@
 import {pool} from '../app.js';
-import fs from 'fs';
-import { Blob } from 'buffer';
+
 
 export const homepage = (req,res) =>{
     let sql="Select * from indexpage";
