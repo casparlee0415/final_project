@@ -61,17 +61,21 @@ export const scooterpage = (req,res) =>
         if(err){
             throw err;
         }
-        var results;
-        var data;
-        db.query(sql,(err,result)=>{
-            if(err){
-                throw err;
-            }
-            data=JSON.parse(JSON.stringify(result[0]));
-            data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
+        
+        var data=new Promise((resolve,reject)=>{
+            db.query(sql,(err,result)=>{
+                if(err){
+                    reject(err);
+                }
+                data=JSON.parse(JSON.stringify(result[0]));
+                data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
+                resolve(data);
+            });
+        }); 
+        var results=new Promise((resolve,reject)=>{    
             db.query(sql2,(err,result)=>{
                 if(err){
-                    throw err;
+                    reject(err);
                 }
                 results=JSON.parse(JSON.stringify(result));
 
@@ -79,10 +83,12 @@ export const scooterpage = (req,res) =>
                     n.scooter_image=Buffer.from(n.scooter_image,'binary').toString('base64');
                     return n;
                 });
-
-                res.render('scooter',{data,results,brand_name});
+                resolve(results);
             }); 
-        });  
+        });
+        
+        res.render('scooter',{data,results,brand_name});
+        
         db.release();
     });
 } 
