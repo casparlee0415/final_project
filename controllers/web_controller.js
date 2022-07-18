@@ -61,34 +61,25 @@ export const scooterpage = (req,res) =>
         if(err){
             throw err;
         }
-        
-        var data=new Promise((resolve,reject)=>{
-            db.query(sql,(err,result)=>{
-                if(err){
-                    reject(err);
-                }
-                let data=JSON.parse(JSON.stringify(result[0]));
-                data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
-                resolve(data);
-            });
-        }); 
-        var results=new Promise((resolve,reject)=>{    
+        db.query(sql,(err,result)=>{
+            if(err){
+                throw err;
+            }
+            let data=JSON.parse(JSON.stringify(result[0]));
+            data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
             db.query(sql2,(err,result)=>{
                 if(err){
-                    reject(err);
+                    throw err;
                 }
-                let results=JSON.parse(JSON.stringify(result));
+                var results=JSON.parse(JSON.stringify(result));
 
                 _.map(results,(n)=>{
                     n.scooter_image=Buffer.from(n.scooter_image,'binary').toString('base64');
                     return n;
                 });
-                resolve(results);
+                res.render('scooter',{data,results,brand_name});
             }); 
         });
-        
-        res.render('scooter',{data,results,brand_name});
-        
         db.release();
     });
 } 
