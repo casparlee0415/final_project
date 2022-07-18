@@ -61,6 +61,10 @@ export const scooterpage = (req,res) =>
         if(err){
             throw err;
         }
+        var data=await Promise.resolve(3);
+
+        console.log(data);
+
         db.query(sql,(err,result)=>{
             if(err){
                 throw err;
