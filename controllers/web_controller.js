@@ -1,5 +1,5 @@
 import {pool} from '../app.js';
-
+import _ from 'lodash';
 
 export const homepage = (req,res) =>{
     let sql="Select * from indexpage";
@@ -36,10 +36,12 @@ export const brandpage = (req,res) =>
                 throw err;
             }
             results=JSON.parse(JSON.stringify(result));
-            for(var i = 0;i < results.length; i++)
-            {
-                results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
-            }
+
+            _.map(results,(n)=>{
+                n.scooter_image=results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+                return n;
+            });
+
             console.log(results);
             res.render('brand',{results,brand_name});
         });
@@ -72,10 +74,12 @@ export const scooterpage = (req,res) =>
                     throw err;
                 }
                 results=JSON.parse(JSON.stringify(result));
-                for(var i = 0;i < results.length; i++)
-                {
-                    results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
-                }
+
+                _.map(results,(n)=>{
+                    n.scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+                    return n;
+                });
+
                 res.render('scooter',{data,results,brand_name});
             }); 
         });  
