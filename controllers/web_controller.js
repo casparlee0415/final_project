@@ -67,7 +67,7 @@ export const scooterpage = (req,res) =>
                 if(err){
                     reject(err);
                 }
-                data=JSON.parse(JSON.stringify(result[0]));
+                let data=JSON.parse(JSON.stringify(result[0]));
                 data.scooter_image=Buffer.from(data.scooter_image,'binary').toString('base64');
                 resolve(data);
             });
@@ -77,7 +77,7 @@ export const scooterpage = (req,res) =>
                 if(err){
                     reject(err);
                 }
-                results=JSON.parse(JSON.stringify(result));
+                let results=JSON.parse(JSON.stringify(result));
 
                 _.map(results,(n)=>{
                     n.scooter_image=Buffer.from(n.scooter_image,'binary').toString('base64');
