@@ -38,7 +38,7 @@ export const brandpage = (req,res) =>
             results=JSON.parse(JSON.stringify(result));
 
             _.map(results,(n)=>{
-                n.scooter_image=results[i].scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+                n.scooter_image=Buffer.from(n.scooter_image,'binary').toString('base64');
                 return n;
             });
 
@@ -76,7 +76,7 @@ export const scooterpage = (req,res) =>
                 results=JSON.parse(JSON.stringify(result));
 
                 _.map(results,(n)=>{
-                    n.scooter_image=Buffer.from(results[i].scooter_image,'binary').toString('base64');
+                    n.scooter_image=Buffer.from(n.scooter_image,'binary').toString('base64');
                     return n;
                 });
 
