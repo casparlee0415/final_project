@@ -1,8 +1,6 @@
-const {
-  DataTypes
-} = require('sequelize');
+import{ DataTypes } from 'sequelize';
 
-module.exports = sequelize => {
+export default sequelize => {
   const attributes = {
     brand_id: {
       type: DataTypes.INTEGER(11),
