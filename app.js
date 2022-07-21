@@ -5,7 +5,7 @@ import path from 'path';
 import engine from 'ejs-locals';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
-import usersRoutes from './routes/routers.js';
+import usersRoutes from './routers/routers.js';
 import morgan from 'morgan';
 import _ from 'lodash';
 import compression from 'compression';
