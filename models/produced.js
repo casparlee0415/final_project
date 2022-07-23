@@ -1,49 +1,33 @@
-import{ DataTypes } from 'sequelize';
+'use strict';
+const {Model,DataTypes,Sequelize}=require('sequelize');
 
-export default sequelize => {
-  const attributes = {
-    scooter_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "scooter_id",
-      references: {
-        key: "scooter_id",
-        model: "scooter_model"
-      }
-    },
-    brand_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "brand_id",
-      references: {
-        key: "brand_id",
-        model: "brand_model"
-      }
+module.exports=(sequelize, DataTypes) => {
+  class produced extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate({brand,scooter}) {
+      // define association here
+      this.belongsTo(scooter,{foreignKey:'scooter_id',as : 'scooter'});
+      this.belongsTo(brand,{foreignKey:'brand_id',as : 'brand'});
     }
-  };
-  const options = {
-    tableName: "produced",
-    comment: "",
-    indexes: [{
-      name: "scooter_idx",
-      unique: false,
-      type: "BTREE",
-      fields: ["scooter_id"]
-    }, {
-      name: "brand_idx",
-      unique: false,
-      type: "BTREE",
-      fields: ["brand_id"]
-    }]
-  };
-  const ProducedModel = sequelize.define("produced_model", attributes, options);
-  return ProducedModel;
+
+    toJSON() {
+      return { ...this.get()}}
+
+  }
+  produced.init({
+    
+  }, {
+    sequelize,
+    timestamps: false,
+    tableName: 'produced',
+    modelName: 'produced',
+  });
+
+  produced.removeAttribute('id');  
+
+  return produced;
 };

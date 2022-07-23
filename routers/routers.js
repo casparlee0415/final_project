@@ -1,7 +1,7 @@
-import express from 'express';
-import bodyParser  from 'body-parser';
+const express=require('express');
+const bodyParser=require('body-parser');
 
-import { homepage,brandpage,scooterpage}  from '../controllers/web_controller.js';
+const { homepage,brandpage,scooterpage}=require('../controllers/web_controller.js');
 
 const app = express();
 // Parse URL-encoded bodies (as sent by HTML forms)
@@ -17,4 +17,4 @@ router.get('/index',homepage);
 router.get('/brand',brandpage);
 router.get('/scooter',scooterpage);
 
-export default router;
+module.exports=router;

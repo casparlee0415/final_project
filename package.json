@@ -7,7 +7,7 @@
   },
   "description": "",
   "main": "app.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
@@ -31,6 +31,7 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.3",
     "sequelize-automate": "^1.2.2",
+    "sequelize-views-support": "^1.2.2",
     "uuid": "^8.3.2",
     "v6": "^0.0.0"
   },

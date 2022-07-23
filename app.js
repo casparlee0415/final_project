@@ -1,14 +1,16 @@
-import express from 'express';
-import mysql from 'mysql';
-import bodyParser from 'body-parser';
-import path from 'path';
-import engine from 'ejs-locals';
-import cors from 'cors';
-import fileUpload from 'express-fileupload';
-import usersRoutes from './routers/routers.js';
-import morgan from 'morgan';
-import _ from 'lodash';
-import compression from 'compression';
+const express=require('express');
+const mysql=require('mysql');
+const bodyParser=require('body-parser');
+const path=require('path');
+const engine=require('ejs-locals');
+const cors=require('cors');
+const fileUpload=require('express-fileupload');
+const usersRoutes=require('./routers/routers.js');
+const morgan=require('morgan');
+const _ =require('lodash');
+const compression=require('compression');
+const {sequelize,scooter,brand,produced}=require('./models');
+
 
 const app = express();
 // Parse URL-encoded bodies (as sent by HTML forms)
@@ -43,28 +45,8 @@ app.use('/', usersRoutes);
 
 var port = process.env.PORT||3000;
 
-app.listen(port);
-
-export var pool = mysql.createPool({
-  host: 'us-cdbr-east-05.cleardb.net',
-  user: 'bc7884781ae97a',
-  password: '775b6e8e',
-  database: 'heroku_f13ed75351ba510',
-  port:'3306',
-  connectionLimit : 10
-})
-
-//// Connect to MySQL
-pool.getConnection((err,db) => {
-  if(err){
-      throw err;
-  }
-  console.log('MySQL connected');
-  db.query("Select 1 from brand",(err,result)=>{
-    if(err){
-      throw err;
-    }
-    db.release();
-  });
-  
-})
+app.listen(port,async()=>{
+  console.log("Server Up On");
+  await sequelize.authenticate();
+  console.log("DataBase Connected");
+});

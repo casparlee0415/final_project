@@ -1,94 +1,58 @@
-import{ DataTypes } from 'sequelize';
+'use strict';
+const {Model,DataTypes,Sequelize}=require('sequelize');
 
-export default sequelize => {
-  const attributes = {
+module.exports=(sequelize, DataTypes) => {
+  class scooter extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate({produced}) {
+      this.hasOne(produced,{foreignKey:'scooter_id',as:'produced'});
+    }
+
+    toJSON() {
+      return { ...this.get()}}
+  }
+  scooter.init({
     scooter_id: {
-      type: DataTypes.INTEGER(11),
       allowNull: false,
-      defaultValue: null,
-      primaryKey: true,
       autoIncrement: true,
-      comment: null,
-      field: "scooter_id"
+      primaryKey: true,
+      type: DataTypes.INTEGER
     },
     scooter_name: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "scooter_name"
+      type:DataTypes.STRING,
     },
     scooter_image: {
-      type: blob,
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "scooter_image"
+      type:DataTypes.BLOB,
     },
     scooter_type: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "scooter_type"
+      type:DataTypes.STRING,
     },
     price: {
-      type: DataTypes.DOUBLE,
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "price"
+      type:DataTypes.DOUBLE,
     },
     engine_type: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "engine_type"
+      type:DataTypes.STRING,
     },
     transmission: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "transmission"
+      type:DataTypes.STRING,
     },
     displacement: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "displacement"
+      type:DataTypes.STRING,
     },
     performance: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "performance"
+      type:DataTypes.STRING
     }
-  };
-  const options = {
-    tableName: "scooter",
-    comment: "",
-    indexes: []
-  };
-  const ScooterModel = sequelize.define("scooter_model", attributes, options);
-  return ScooterModel;
+  }, {
+    sequelize,
+    timestamps: false,
+    tableName: 'scooter',
+    modelName: 'scooter',
+  });
+
+
+  return scooter;
 };
