@@ -45,8 +45,8 @@ app.use('/', usersRoutes);
 
 var port = process.env.PORT||3000;
 
-app.listen(port,async()=>{
+app.listen(port,()=>{
   console.log("Server Up On");
-  await sequelize.authenticate();
+  sequelize.authenticate();
   console.log("DataBase Connected");
 });
